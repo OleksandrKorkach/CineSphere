@@ -1,17 +1,11 @@
 package com.media.cinesphere.dtos.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthenticationRequestDto {
     private String username;
     private String password;
-
-    public AuthenticationRequestDto(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public  AuthenticationRequestDto(){
-
-    }
 
     public String getUsername() {
         return username;

@@ -1,7 +1,6 @@
 package com.media.cinesphere.security;
 
 import com.media.cinesphere.entities.User;
-import com.media.cinesphere.security.jwt.JwtUser;
 import com.media.cinesphere.security.jwt.JwtUserFactory;
 import com.media.cinesphere.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

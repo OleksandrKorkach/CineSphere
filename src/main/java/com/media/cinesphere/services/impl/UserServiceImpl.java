@@ -1,6 +1,7 @@
 package com.media.cinesphere.services.impl;
 
 import com.media.cinesphere.dtos.auth.UserRegistrationDto;
+import com.media.cinesphere.dtos.user.UserProfileDto;
 import com.media.cinesphere.entities.Role;
 import com.media.cinesphere.entities.User;
 import com.media.cinesphere.entities.enums.Status;
@@ -39,7 +40,13 @@ public class UserServiceImpl implements UserService {
         User user = registrationDto.toUser();
         setUserRoles(user);
         setRegistrationDetails(user);
-        User registeredUser = userRepository.save(user);
+        userRepository.save(user);
+    }
+
+    @Override
+    public UserProfileDto getUserProfileById(Long id) {
+        User user = userRepository.getById(id);
+        return UserProfileDto.fromUser(user);
     }
 
     public void setUserRoles(User user){
