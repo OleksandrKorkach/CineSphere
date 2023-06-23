@@ -1,7 +1,7 @@
 package com.media.cinesphere.dtos.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.media.cinesphere.dtos.film.WatchListDto;
+import com.media.cinesphere.dtos.watchlist.WatchListDto;
 import com.media.cinesphere.entities.User;
 
 import java.time.LocalDateTime;

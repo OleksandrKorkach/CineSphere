@@ -1,7 +1,8 @@
-package com.media.cinesphere.dtos.film;
+package com.media.cinesphere.dtos.watchlist;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.media.cinesphere.dtos.film.FilmDto;
 import com.media.cinesphere.entities.WatchList;
 
 import java.util.Set;

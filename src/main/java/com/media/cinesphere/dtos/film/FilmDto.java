@@ -6,34 +6,45 @@ import com.media.cinesphere.entities.Professional;
 import com.media.cinesphere.entities.enums.Genre;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FilmDto {
     private Long id;
-    private String name;
+    private String type;
+    private String title;
+    private Integer duration;
     private String description;
+    private Set<String> directors;
+    private Set<String> stars;
+    private Set<String> actors;
+    private Set<String> writers;
     private Set<Genre> genres;
     private Integer releaseYear;
-    private Integer duration;
     private Double overallRating;
-    private Set<Professional> directors;
-    private Set<Professional> writers;
-    private Set<Professional> stars;
-    private Set<Professional> actors;
 
     public static FilmDto fromFilm(Film film){
         FilmDto dto = new FilmDto();
         dto.setId(film.getId());
-        dto.setName(film.getTitle());
+        dto.setTitle(film.getTitle());
+        dto.setType(film.getType());
         dto.setDescription(film.getDescription());
         dto.setGenres(film.getGenres());
         dto.setReleaseYear(film.getReleaseYear());
         dto.setDuration(film.getDuration());
         dto.setOverallRating(film.getOverallRating());
-        dto.setDirectors(film.getDirectors());
-        dto.setWriters(film.getWriters());
-        dto.setStars(film.getStars());
-        dto.setActors(film.getActors());
+        Set<String> directors = film.getDirectors().stream()
+                        .map(Professional::getName).collect(Collectors.toSet());
+        Set<String> stars = film.getStars().stream()
+                .map(Professional::getName).collect(Collectors.toSet());
+        Set<String> actors = film.getActors().stream()
+                .map(Professional::getName).collect(Collectors.toSet());
+        Set<String> writers = film.getWriters().stream()
+                .map(Professional::getName).collect(Collectors.toSet());
+        dto.setDirectors(directors);
+        dto.setStars(stars);
+        dto.setActors(actors);
+        dto.setWriters(writers);
         return dto;
     }
 
@@ -46,12 +57,28 @@ public class FilmDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public String getDescription() {
@@ -60,6 +87,38 @@ public class FilmDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<String> getDirectors() {
+        return directors;
+    }
+
+    public void setDirectors(Set<String> directors) {
+        this.directors = directors;
+    }
+
+    public Set<String> getStars() {
+        return stars;
+    }
+
+    public void setStars(Set<String> stars) {
+        this.stars = stars;
+    }
+
+    public Set<String> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<String> actors) {
+        this.actors = actors;
+    }
+
+    public Set<String> getWriters() {
+        return writers;
+    }
+
+    public void setWriters(Set<String> writers) {
+        this.writers = writers;
     }
 
     public Set<Genre> getGenres() {
@@ -78,51 +137,11 @@ public class FilmDto {
         this.releaseYear = releaseYear;
     }
 
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
     public Double getOverallRating() {
         return overallRating;
     }
 
     public void setOverallRating(Double overallRating) {
         this.overallRating = overallRating;
-    }
-
-    public Set<Professional> getDirectors() {
-        return directors;
-    }
-
-    public void setDirectors(Set<Professional> directors) {
-        this.directors = directors;
-    }
-
-    public Set<Professional> getWriters() {
-        return writers;
-    }
-
-    public void setWriters(Set<Professional> writers) {
-        this.writers = writers;
-    }
-
-    public Set<Professional> getStars() {
-        return stars;
-    }
-
-    public void setStars(Set<Professional> stars) {
-        this.stars = stars;
-    }
-
-    public Set<Professional> getActors() {
-        return actors;
-    }
-
-    public void setActors(Set<Professional> actors) {
-        this.actors = actors;
     }
 }
