@@ -4,10 +4,7 @@ import com.media.cinesphere.dtos.film.FilmDto;
 import com.media.cinesphere.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/title")
@@ -24,4 +21,10 @@ public class FilmController {
         FilmDto film = filmService.getFilmById(titleId);
         return ResponseEntity.ok(film);
     }
+
+    @PostMapping("/titles")
+    public ResponseEntity<?> getFilms(){
+        return ResponseEntity.ok(filmService.getAllFilms());
+    }
+
 }
