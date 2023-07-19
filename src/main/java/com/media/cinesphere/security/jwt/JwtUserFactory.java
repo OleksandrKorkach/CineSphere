@@ -2,7 +2,6 @@ package com.media.cinesphere.security.jwt;
 
 import com.media.cinesphere.entities.Role;
 import com.media.cinesphere.entities.User;
-import com.media.cinesphere.entities.enums.Status;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -21,8 +20,8 @@ public final class JwtUserFactory {
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getUpdated(),
+                user.getStatus().equals("Active"),
+                user.getLastUpdated(),
                 mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))
         );
     }

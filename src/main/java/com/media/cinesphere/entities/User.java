@@ -1,6 +1,7 @@
 package com.media.cinesphere.entities;
 
 import com.media.cinesphere.entities.enums.Status;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -24,26 +25,30 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "was_created")
-    private LocalDateTime wasCreated;
+    @CreatedDate
+    @Column(name = "created")
+    private LocalDateTime created;
 
     @LastModifiedDate
-    @Column(name = "updated")
-    private LocalDateTime updated;
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
 
     // private ProfilePhoto;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
+    @OneToMany
+    @JoinTable(name = "user_watchlists",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "watchlist_id", referencedColumnName = "id")})
+    private List<Watchlist> watchlists;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "user")
-    private List<WatchList> watchLists;
+    @Column(name = "status")
+    private String status;
 
     @Override
     public String toString() {
@@ -58,14 +63,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
     }
 
     public String getUsername() {
@@ -88,24 +85,24 @@ public class User {
         return email;
     }
 
-    public List<WatchList> getWatchLists() {
-        return watchLists;
-    }
-
-    public void setWatchLists(List<WatchList> watchLists) {
-        this.watchLists = watchLists;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public LocalDateTime getWasCreated() {
-        return wasCreated;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setWasCreated(LocalDateTime wasCreated) {
-        this.wasCreated = wasCreated;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public List<Role> getRoles() {
@@ -116,11 +113,19 @@ public class User {
         this.roles = roles;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Watchlist> getWatchlists() {
+        return watchlists;
+    }
+
+    public void setWatchlists(List<Watchlist> watchlists) {
+        this.watchlists = watchlists;
     }
 }

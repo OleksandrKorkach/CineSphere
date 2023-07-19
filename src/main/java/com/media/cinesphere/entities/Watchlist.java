@@ -1,27 +1,25 @@
 package com.media.cinesphere.entities;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-public class WatchList {
+public class Watchlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
-    @Column(name = "is_public")
-    private Boolean isPublic;
-
     @Column(name = "name")
     private String name;
+    @Column(name = "media_quantity")
+    private Integer mediaQuantity;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Film> films;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "watchlist")
+    private List<WatchlistMedia> titles;
 
     public Long getId() {
         return id;
@@ -29,14 +27,6 @@ public class WatchList {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Boolean getPublic() {
-        return isPublic;
-    }
-
-    public void setPublic(Boolean aPublic) {
-        isPublic = aPublic;
     }
 
     public String getName() {
@@ -47,6 +37,14 @@ public class WatchList {
         this.name = name;
     }
 
+    public Integer getMediaQuantity() {
+        return mediaQuantity;
+    }
+
+    public void setMediaQuantity(Integer mediaQuantity) {
+        this.mediaQuantity = mediaQuantity;
+    }
+
     public User getUser() {
         return user;
     }
@@ -55,11 +53,11 @@ public class WatchList {
         this.user = user;
     }
 
-    public Set<Film> getFilms() {
-        return films;
+    public List<WatchlistMedia> getTitles() {
+        return titles;
     }
 
-    public void setFilms(Set<Film> films) {
-        this.films = films;
+    public void setTitles(List<WatchlistMedia> titles) {
+        this.titles = titles;
     }
 }

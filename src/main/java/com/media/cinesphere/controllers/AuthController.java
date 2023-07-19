@@ -50,10 +50,10 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/registration")
-    public ResponseEntity<?> register(@RequestBody UserRegistrationDto registrationDto){
-        userService.register(registrationDto);
-        return ResponseEntity.ok().body("Successfully created new user!");
-    }
+//    @PostMapping("/registration")
+//    public ResponseEntity<?> register(@RequestBody UserRegistrationDto registrationDto){
+//        userService.register(registrationDto);
+//        return ResponseEntity.ok().body("Successfully created new user!");
+//    }
 
 }

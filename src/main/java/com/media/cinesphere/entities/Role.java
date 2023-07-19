@@ -16,23 +16,19 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
-    @Column(name = "was_created")
-    private LocalDateTime wasCreated;
-
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private List<User> users;
+    @CreatedDate
+    @Column(name = "created")
+    private LocalDateTime created;
 
     @LastModifiedDate
-    @Column(name = "updated")
-    private LocalDateTime updated;
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
 
     @Override
     public String toString() {
@@ -43,7 +39,7 @@ public class Role {
 
     @PrePersist
     private void init() {
-        wasCreated = LocalDateTime.now();
+        created = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -54,14 +50,6 @@ public class Role {
         this.id = id;
     }
 
-    public LocalDateTime getWasCreated() {
-        return wasCreated;
-    }
-
-    public void setWasCreated(LocalDateTime wasCreated) {
-        this.wasCreated = wasCreated;
-    }
-
     public String getName() {
         return name;
     }
@@ -70,27 +58,27 @@ public class Role {
         this.name = name;
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
     public List<User> getUsers() {
         return users;
     }
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 }
